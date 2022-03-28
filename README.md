@@ -25,7 +25,9 @@ Here's a walkthrough of implemented user stories:
 
 
 Signing Up
+
 <img src='http://g.recordit.co/1MSjrfwkhT.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
+Viewing Feed
 
 <img src='http://g.recordit.co/cF6yPYJcua.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
