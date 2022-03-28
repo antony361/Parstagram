@@ -26,7 +26,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidAppear(animated)
         
         let query = PFQuery(className: "Posts")
-        query.includeKey("author")
+        query.includeKey("authoer")
         query.limit = 20
         
         query.findObjectsInBackground { (posts, Error) in
@@ -46,8 +46,17 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell") as! PostCell
         
         let post = posts[indexPath.row]
-        let user = post["name"] as! PFUser
-        cell.usernameLabel.text = post["name"] as! String
+        let user = post["authoer"] as! PFUser
+        cell.usernameLabel.text = user.username
+        
+        cell.captionLabel.text = post["name"] as! String
+        
+        
+        let imageFile = post["image"] as! PFFileObject
+        let urlString = imageFile.url!
+        let url = URL(string: urlString)!
+        
+        cell.photoView.af_setImage(withURL: url)
         
         return cell
     }
