@@ -70,27 +70,25 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func messageInputBar(_ inputBar: MessageInputBar, didPressSendButtonWith text: String) {
         let comment = PFObject(className: "Comments")
-        comment["text"] = "This is a random comment"
-        comment["post"] = selectedPost
-        comment["author"] = PFUser.current()!
-
-        selectedPost.add(comment, forKey: "comments")
-
-        selectedPost.saveInBackground { (success, Error) in
-            if success {
-                print("Saved comment")
-            }
-            else {
-                print("Error saving comment")
-            }
-        }
-        
-        tableView.reloadData()
-        
-        commentBar.inputTextView.text = nil
-        showCommentBar = false
-        becomeFirstResponder()
-        commentBar.inputTextView.resignFirstResponder()
+                comment["text"] = text
+                comment["post"] = selectedPost
+                comment["author"] = PFUser.current()!
+                
+                selectedPost.add(comment, forKey: "comments")
+                selectedPost.saveInBackground { (success, error) in
+                    if success {
+                        print("Comment saved")
+                    } else {
+                        print("Error in saving comment")
+                    }
+                }
+                tableView.reloadData()
+                
+                // Clear and dismiss the input bar
+                commentBar.inputTextView.text = nil
+                showCommentBar = false
+                becomeFirstResponder()
+                commentBar.inputTextView.resignFirstResponder()
     }
     
     
